@@ -1,0 +1,110 @@
+<div class="page-header">
+    <h1 class="title">Observable</h1>
+    <a class="link-rxjs" href="https://rxjs.dev/guide/observable" target="_blank" rel="noopener">rxjs observable ➡️</a>
+</div>
+
+<p>
+    ¿Qué es un Observable? Voy a explicarte qué es un Observable con manzanas 🍎.
+</p>
+
+<p>
+    Imagínate que un Observable es una cinta transportadora que emite frutas (datos). Tú te pones al final llamando al
+    método subscribe y le pasas una callback (<span class="next">next</span>), una callback
+    (<span class="error">error</span>) y una callback (<span class="complete">complete</span>) que se invocan
+    cuando la fruta llega al final (<span class="next">next</span>), cuando viene otra cosa que no es una fruta
+    (<span class="error">error</span>), o cuando la cinta se para (<span class="complete">complete</span>).
+</p>
+
+<p>
+    Entre medias (el pipe) estan los operadores que pueden manipular esas frutas, pero los veremos en otras secciones.
+</p>
+
+<p>Veamos un primer ejemplo, uno sencillo:</p>
+
+<textarea highlight-js [lang]="'typescript'">
+import { Observable } from 'rxjs';
+
+const myFirstObservable = new Observable((subscriber) => {
+  doSomeStuff();
+  subscriber.next('🍎'); // will invoke next callback passed in the subscribe method
+  doOtherSuff();
+  subscriber.next('🍎');
+  subscriber.complete(); // will invoke complete callback passed in the subscribe method
+});
+
+// the callback function passed to the observable is not executed until we subscribe
+myFirstObservable.subscribe({
+  next: (value) => console.log(`The next value is: ${value}`),
+  error: (error) => console.log(`Error: ${error}`),
+  complete: () => console.log('The observable has completed'),
+});
+
+// Output
+// ======
+// The next value is: 🍎
+// The next value is: 🍎
+// The observable has completed
+</textarea>
+
+<p>
+    Cuando creamos un objeto de tipo Observable con la palabra reservada new, le tenemos que
+    pasar una función que toma un parámetro: el suscriptor.
+</p>
+
+<p>
+    Lo bueno de esta función es que puede "devolver" varios resultados llamando al método <span class="next">next</span>
+    del suscriptor.
+    Cuando ha devuelto todos los valores el Observable se completa y ya no volverá a emitir más valores. Igual si
+    el observable emite un error, ya no se devuelven más valores:
+</p>
+
+<textarea highlight-js [lang]="'typescript'">
+new Observable((subscriber) => {
+  setTimeout(() => subscriber.next('This is timeout 🍊'), 10); // it won't emit
+  subscriber.next('🍎');
+  subscriber.next('🍐');
+  subscriber.error('🚗');
+  console.log('This code still is executed: 🍓');
+  subscriber.next('🍍'); // it won't emit
+}).subscribe({
+  next: (fruit) => console.log(`Next: ${fruit}`),
+  error: (error) => console.log(`Error: ${error}`),
+  complete: () => console.log('Observable completed'),
+});
+
+// Output
+// ======
+// Next: 🍎
+// Next: 🍐
+// Error: 🚗
+// This code still is executed: 🍓
+</textarea>
+
+<p>
+    Aunque por más veces que llamemos a los métodos del suscriptor (<span class="next">next</span>,
+    <span class="error">error</span> o <span class="complete">complete</span>) este no emitirá eventos y las
+    funciones callback del subscribe no se ejecutarán, porque el Observable ha completado o emitido un error.
+</p>
+
+<p>
+    A continuación te dejo un simulador para que pruebes:
+</p>
+
+<svg appDemoContainer viewBox="0 0 640 240">
+    <g transform="translate(30, 80)" appConveyorController [button1]="controllerButtons[0]"
+        [button2]="controllerButtons[1]" [button3]="controllerButtons[2]" [button4]="controllerButtons[3]"
+        [button5]="controllerButtons[4]" (onButtonClick)="onControllerButtonClick($event)">
+    </g>
+
+    <g transform="translate(220, 80)" appConveyorHorizontal [conveyorWorking$]="conveyorWorking$" [length]="250.8">
+    </g>
+
+    <g transform="translate(496, 20)" appSubscriber [showSpeechBubble$]="speechBubble$"
+        (onSubscribe$)="onSubscribe($event)">
+    </g>
+
+    <g>
+        <text *ngFor="let element of elementsInConveyor" [attr.x]="element.x"
+            [attr.y]="element.y">{{element.value}}</text>
+    </g>
+</svg>

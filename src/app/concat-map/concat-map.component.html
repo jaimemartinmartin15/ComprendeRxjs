@@ -1,0 +1,136 @@
+<div class="page-header">
+  <h1 class="title">ConcatMap</h1>
+  <a class="link-rxjs" href="https://rxjs.dev/api/operators/concatMap" target="_blank" rel="noopener">rxjs concatMap
+    ➡️</a>
+</div>
+
+<p>
+  Este operador coge cada uno de los elementos emitidos por un Observable fuente y devuelve, por orden, un nuevo
+  Observable por cada elemento. Es decir, hasta que no se completa el nuevo Observable, no crea uno nuevo para el
+  siguiente elemento en el Observable fuente. Los elementos del nuevo Observable son puestos en el Obsevable fuente
+  y son entregados al suscriptor.
+</p>
+
+<textarea highlight-js [lang]="'typescript'">
+import { Observable, concatMap } from 'rxjs';
+
+// This is the source observable
+const hearts$ = new Observable<string>((subscriber) => {
+  subscriber.next('💜');
+  setTimeout(() => subscriber.next('💚'), 100);
+  setTimeout(() => subscriber.next('❤️'), 200);
+  setTimeout(() => subscriber.next('🏘️'), 300);
+});
+
+// Use the pipe method to add operators
+hearts$
+  .pipe(
+    concatMap(
+      (heart) =>
+        new Observable((subscriber) => {
+          if (heart === '💜') {
+            setTimeout(() => {
+              subscriber.next('🍇');
+              subscriber.complete();
+            }, 150);
+          } else if (heart === '💚') {
+            subscriber.next('🍏');
+            subscriber.complete();
+          } else if (heart === '❤️') {
+            setTimeout(() => {
+              subscriber.next('🍓');
+              subscriber.complete();
+            }, 150);
+          } else {
+            subscriber.error(`No heart value: ${heart}`);
+          }
+        })
+    )
+  )
+  .subscribe({
+    next: (value) => console.log(`The next value is: ${value}`),
+    error: (error) => console.error(`There is an error: ${error}`),
+    complete: () => console.log('Completed'),
+  });
+
+// Output
+// ======
+// The next value is: 🍇
+// The next value is: 🍏
+// The next value is: 🍓
+// There is an error: No heart value: 🏘️
+</textarea>
+
+<p>
+  En este ejemplo tenemos un Observable que emite corazones de colores, y por cada corazón tenemos otro observable que
+  nos emite una fruta del mismo color que el corazón. En el momento que hay un error en cualquiera de los Observables
+  este se emite al suscriptor y todos los Observables pendientes se cancelan.
+</p>
+
+<p>
+  Ahora veamos los detalles. Primero se emite el 💜. Este creará un Observable que emitirá unas 🍇 pasados 150
+  milisegundos. Pasados 100 milisegundos, se emite el 💚. Como el Observable del 💜 aún no ha completado, se retrasa la
+  creación del Observable para el 💚. Pasan entonces 50 milisegundos y se emiten las 🍇 y se completa el Observable. En
+  ese momento el Observable del 💚 esta pendiente, así que se subscribe a él y emite inmediatamente una 🍏 y completa.
+  Pasan 50 milisegundos más y se emite el ❤️, que emitirá pasados 150 milisegundos una 🍓. Pasan 100 milisegundos y se
+  emite la 🏘️. Como el Observable del ❤️ aún no ha completado, se retrasa la creación del nuevo Observable. Pasan 50
+  milisegundos más y se emite la 🍓 y completa. El Observable pendiente de la 🏘️ entonces emite ahora el error.
+</p>
+
+<p>
+  A continuación te dejo un simulador para que pruebes:
+</p>
+
+<svg appDemoContainer viewBox="0 0 850 640">
+  <!-- main conveyor controller -->
+  <g appConveyorController transform="translate(50,490)" [button1]="controllerButtons[MAIN_ID][0]"
+    [button2]="controllerButtons[MAIN_ID][1]" [button3]="controllerButtons[MAIN_ID][2]"
+    [button4]="controllerButtons[MAIN_ID][3]" [button5]="controllerButtons[MAIN_ID][4]"
+    (onButtonClick)="onControllerButtonClick($event)">
+  </g>
+
+  <!-- main conveyor -->
+  <g transform="translate(260, 490)" appConveyorHorizontal [length]="403"
+    [conveyorWorking$]="conveyorsWorking[MAIN_ID]">
+  </g>
+
+  <!-- operator -->
+  <g appOperator transform="translate(420, 452)"></g>
+
+  <!-- operator conveyor and controllers -->
+  <g [attr.transform]="'translate('+(460 - (200*CONCATMAP.length/2))+', 70)'" class="smooth-tranform-animation">
+    <g [attr.transform]="'translate('+200*i+',0)'" *ngFor="let C_ID of CONCATMAP; let i = index;" @fadeInOut
+      class="smooth-tranform-animation">
+
+      <!-- operator conveyor controller -->
+      <g appConveyorController [attr.transform]="'translate(25,0)'" [button1]="controllerButtons[C_ID][0]"
+        [button2]="controllerButtons[C_ID][1]" [button3]="controllerButtons[C_ID][2]"
+        [button4]="controllerButtons[C_ID][3]" [button5]="controllerButtons[C_ID][4]"
+        (onButtonClick)="onControllerButtonClick($event)">
+      </g>
+
+      <!-- operator conveyor -->
+      <g [attr.transform]="'translate(70, 120)'" appConveyorVertical [length]="203"
+        [conveyorWorking$]="conveyorsWorking[C_ID]">
+      </g>
+
+      <!-- elements in operator conveyor -->
+      <g>
+        <ng-container *ngFor="let element of elementsInConveyor">
+          <text *ngIf="element.conveyorId === C_ID" x="90" [attr.y]="element.y">{{element.value}}</text>
+        </ng-container>
+      </g>
+    </g>
+  </g>
+
+  <!-- subscriber -->
+  <g appSubscriber transform="translate(690,420)" [showSpeechBubble$]="speechBubble$"
+    (onSubscribe$)="onSubscribe($event)"></g>
+
+  <!-- elements in main conveyor -->
+  <g>
+    <ng-container *ngFor="let element of elementsInConveyor">
+      <text *ngIf="element.conveyorId === MAIN_ID" [attr.x]="element.x" y="546">{{element.value}}</text>
+    </ng-container>
+  </g>
+</svg>

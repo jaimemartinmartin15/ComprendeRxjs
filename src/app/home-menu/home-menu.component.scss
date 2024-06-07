@@ -1,0 +1,108 @@
+:host {
+    display: block;
+    max-width: 1100px;
+    margin: auto;
+    height: 100%;
+    padding-bottom: 65px;
+}
+
+.screen-title {
+    text-align: center;
+}
+
+.search-input-box {
+    text-align: center;
+
+    .icon-and-input {
+        position: relative;
+
+        i {
+            position: absolute;
+            left: 10px;
+            top: 0;
+            min-width: 18px;
+        }
+
+        input[type="text"] {
+            border: 2px solid black;
+            border-radius: 5px;
+            min-width: 380px;
+            min-height: 25px;
+            padding: 4px 40px;
+            font-size: 1em;
+        }
+    }
+}
+
+.group-of-groups {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    .operators-group {
+        padding-left: 30px;
+        width: 33.3%;
+        margin-top: 20px;
+        box-sizing: border-box;
+
+        .operators-list {
+            list-style: none;
+            padding: 0 0 0 5px;
+
+            .operator-link a {
+                text-decoration: none;
+                color: black;
+                transition: 0.5s;
+                line-height: 25px;
+
+                &:hover {
+                    font-size: 1.15em;
+
+                    &::after {
+                        content: "➡️";
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            .operator-link:not(:first-child) {
+                margin-top: 15px;
+            }
+        }
+    }
+
+    &::after {
+        content: "";
+        flex: auto;
+    }
+}
+
+@media (max-width: 992px) {
+    :host {
+        max-width: none;
+        margin: 50px;
+    }
+    .group-of-groups {
+        .operators-group {
+            width: 50%;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .group-of-groups {
+        .operators-group {
+            width: 100%;
+        }
+    }
+
+    .search-input-box {
+        .icon-and-input {
+            input[type="text"] {
+                box-sizing: border-box;
+                min-width: unset;
+                width: 100%;
+            }
+        }
+    }
+}
