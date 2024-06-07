@@ -1,0 +1,19 @@
+@import "../../../styles/colors";
+
+.chassis {
+    fill: #ddd;
+}
+
+.chain {
+    stroke: #888;
+    stroke-width: 5;
+    stroke-linecap: round;
+}
+
+.hide-remaining-chain {
+    fill: $color-background-panel;
+}
+
+.paw {
+    fill: #000;
+}

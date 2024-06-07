@@ -1,0 +1,11 @@
+@import "../../styles/colors";
+@import "../../styles/base-page";
+@import "../../styles/demo";
+
+:host {
+    display: block;
+    border-radius: 5px;
+    background-color: $color-background-panel;
+    box-shadow: 0 0 5px $color-orange;
+    user-select: none;
+}

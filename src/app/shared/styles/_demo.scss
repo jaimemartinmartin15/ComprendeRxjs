@@ -1,0 +1,16 @@
+@import "./colors";
+
+.demo-button {
+    stroke: $color-primary-button-text;
+    stroke-width: 2;
+    fill: $color-orange;
+    cursor: pointer;
+
+    .text {
+        text-anchor: middle;
+        dominant-baseline: middle;
+        stroke: none;
+        fill: $color-primary-button-text;
+        font-size: 1.1em;
+    }
+}

@@ -1,0 +1,5 @@
+<svg:rect x="2" y="62" [attr.width]="length - 4" height="30" rx="15" ry="15" class="chassis"  />
+<svg:rect x="2" y="62" [attr.width]="length - 4" height="30" rx="15" ry="15" class="chain" [attr.stroke-dashoffset]="strokeDashoffset" />
+
+<svg:line x1="40" y1="90" x2="40" y2="110" class="paw" />
+<svg:line [attr.x1]=" length -40" y1="90" [attr.x2]=" length -40" y2="110" class="paw" />
