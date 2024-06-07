@@ -1,10 +1,9 @@
-import { apply, mergeWith, Rule, SchematicContext, Tree, url, template, move } from '@angular-devkit/schematics';
 import { strings } from '@angular-devkit/core';
 import { classify, dasherize } from '@angular-devkit/core/src/utils/strings';
-
+import { Rule, SchematicContext, Tree, apply, mergeWith, move, template, url } from '@angular-devkit/schematics';
 import { Schema } from './schema';
 
-const RXJS_ROUTING_MODULE_PATH = 'src/pages-rxjs/rxjs-layout-page/rxjs-layout-page-routing.module.ts';
+const RXJS_ROUTING_MODULE_PATH = './src/app/rxjs-layout-page/rxjs-layout-page-routing.module.ts';
 
 export function rxjsPage({ name }: Schema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -16,7 +15,7 @@ export function rxjsPage({ name }: Schema): Rule {
         date: `${new Date().getDate()} de ${new Date().toLocaleDateString('es-ES', { month: 'long' })} de ${new Date().getFullYear()}`,
         ...strings,
       }),
-      move('src/pages-rxjs'),
+      move('src/app'),
     ]);
 
     // add new path to the component in the routing module
@@ -28,18 +27,6 @@ export function rxjsPage({ name }: Schema): Rule {
         loadChildren: () => import('../${dasherize(name)}/${dasherize(name)}.module').then((m) => m.${classify(name)}Module),
       },${rxjsRoutingModule.slice(indexToInsert)}`;
     tree.overwrite(RXJS_ROUTING_MODULE_PATH, rxjsRoutingModule);
-
-    // update the sitemap.xml
-    const PATH_SITEMAP = '/sitemap.xml';
-    let sitemapFile: string = tree.read(PATH_SITEMAP)!.toString();
-    sitemapFile =
-      sitemapFile.substring(0, sitemapFile.indexOf('</urlset>')) +
-      `  <url>
-    <loc>https://www.jaimeelingeniero.es/comprende-rxjs/${name}</loc>
-  </url>
-` +
-      '</urlset>';
-    tree.overwrite(PATH_SITEMAP, sitemapFile);
 
     return mergeWith(sourceParametrizedTemplates);
   };
