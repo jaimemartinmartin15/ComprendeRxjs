@@ -1,0 +1,41 @@
+<svg:linearGradient id="controller-background" x1="0%" y1="0%" x2="100%" y2="0%">
+  <stop offset="0%" style="stop-color:#e8e8e8;stop-opacity:1" />
+  <stop offset="45%" style="stop-color:#fefefe;stop-opacity:1" />
+  <stop offset="55%" style="stop-color:#fefefe;stop-opacity:1" />
+  <stop offset="100%" style="stop-color:#e8e8e8;stop-opacity:1" />
+</svg:linearGradient>
+
+<svg:path class="outline" d="M55 12C75 15 75 15 96 12C119 -13 140 8 145 32C159 88 154 111 143 112C106 113 125 87 77 86C28 87 49 113 11 112C0 111 -4 88 9 32C14 8 36 -13 55 12" />
+
+<!-- id of the controller -->
+<svg:text *ngIf="controllerId" class="text" x="78" y="36" (click)="onControllerIdClick.emit(controllerId)">{{controllerId}}</svg:text>
+
+<!-- top left button -->
+<svg:g *ngIf="button1" class="controller-button" (click)="onControllerButtonClick(button1)">
+  <circle [ngClass]="getButtonClass(button1)" cx="40" cy="32" r="18" />
+  <text class="text" x="40" y="38">{{button1.value}}</text>
+</svg:g>
+
+<!-- bottom left button -->
+<svg:g *ngIf="button2" class="controller-button" (click)="onControllerButtonClick(button2)">
+  <circle [ngClass]="getButtonClass(button2)" cx="28" cy="76" r="18" />
+  <text class="text" x="26" y="83">{{button2.value}}</text>
+</svg:g>
+
+<!-- middle button -->
+<svg:g *ngIf="button3" class="controller-button" (click)="onControllerButtonClick(button3)">
+  <circle [ngClass]="getButtonClass(button3)" cx="78" cy="64" r="18" />
+  <text class="text" x="78" y="72">{{button3.value}}</text>
+</svg:g>
+
+<!-- top right button -->
+<svg:g *ngIf="button4" class="controller-button" (click)="onControllerButtonClick(button4)">
+  <circle [ngClass]="getButtonClass(button4)" cx="116" cy="32" r="18" />
+  <text class="text" x="116" y="38">{{button4.value}}</text>
+</svg:g>
+
+<!-- bottom right button -->
+<svg:g *ngIf="button5" class="controller-button" (click)="onControllerButtonClick(button5)">
+  <circle [ngClass]="getButtonClass(button5)" cx="128" cy="76" r="18" />
+  <text class="text" x="128" y="83">{{button5.value}}</text>
+</svg:g>

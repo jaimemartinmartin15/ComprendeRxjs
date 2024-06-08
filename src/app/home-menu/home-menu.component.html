@@ -1,0 +1,41 @@
+<h1 class="screen-title">Comprende Rxjs</h1>
+
+<div class="search-input-box">
+    <span class="icon-and-input">
+        <i>
+            <svg viewBox="0 0 15 20" transform="rotate(-45)">
+                <circle cx="8" cy="7" r="5" stroke="black" stroke-width="2" fill="none" />
+                <line x1="8" y1="12" x2="8" y2="20" stroke="black" stroke-width="2" />
+            </svg>
+        </i>
+        <input type="text" name="filter" id="filter" placeholder="Busca aquí" [formControl]="searchControl">
+    </span>
+</div>
+
+<div class="group-of-groups" *ngIf="hasToShowGroup(LINKS_TO_START)">
+    <div class="operators-group">
+        <h2 class="subtitle">{{LINKS_TO_START.subtitle}}</h2>
+        <ul class="operators-list">
+            <ng-container *ngFor="let link of LINKS_TO_START.links">
+                <li class="operator-link" *ngIf="hasToShowLink(link)">
+                    <a [routerLink]="link.url">{{link.display}}</a>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>
+
+<div class="group-of-groups">
+    <ng-container *ngFor="let group of LINKS_GROUPS_OPERATORS">
+        <div class="operators-group" *ngIf="hasToShowGroup(group)">
+            <h2 class="subtitle">{{group.subtitle}}</h2>
+            <ul class="operators-list">
+                <ng-container *ngFor="let link of group.links">
+                    <li class="operator-link" *ngIf="hasToShowLink(link)">
+                        <a [routerLink]="link.url">{{link.display}}</a>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+    </ng-container>
+</div>

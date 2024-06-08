@@ -1,0 +1,133 @@
+<div class="page-header">
+  <h1 class="title">MergeMap</h1>
+  <a class="link-rxjs" href="https://rxjs.dev/api/operators/mergeMap" target="_blank" rel="noopener">rxjs mergeMap
+    ➡️</a>
+</div>
+
+<p>
+  Este operador coge cada uno de los elementos emitidos por un Observable fuente y devuelve un nuevo Observable por
+  cada elemento, cuyos elementos emitidos serán puestos de nuevo en el observable fuente y que serán los que se entregen
+  al suscriptor.
+</p>
+
+<textarea highlight-js [lang]="'typescript'">
+import { Observable, mergeMap } from 'rxjs';
+
+// This is the source observable
+const hearts$ = new Observable<string>((subscriber) => {
+  subscriber.next('💜');
+  setTimeout(() => subscriber.next('💚'), 100);
+  setTimeout(() => subscriber.next('❤️'), 200);
+  setTimeout(() => subscriber.next('🏘️'), 300);
+});
+
+// Use the pipe method to add operators
+hearts$
+  .pipe(
+    mergeMap(
+      (heart) =>
+        new Observable((subscriber) => {
+          if (heart === '💜') {
+            setTimeout(() => {
+              subscriber.next('🍇');
+              subscriber.complete();
+            }, 150);
+          } else if (heart === '💚') {
+            subscriber.next('🍏');
+            subscriber.complete();
+          } else if (heart === '❤️') {
+            setTimeout(() => {
+              subscriber.next('🍓');
+              subscriber.complete();
+            }, 150);
+          } else {
+            subscriber.error(`No heart value: ${heart}`);
+          }
+        })
+    )
+  )
+  .subscribe({
+    next: (value) => console.log(`The next value is: ${value}`),
+    error: (error) => console.error(`There is an error: ${error}`),
+    complete: () => console.log('Completed'),
+  });
+
+// Output
+// ======
+// The next value is: 🍏
+// The next value is: 🍇
+// There is an error: No heart value: 🏘️
+</textarea>
+
+<p>
+  En este ejemplo tenemos un Observable que emite corazones de colores, y por cada corazón tenemos otro Observable que
+  nos emite una fruta del mismo color que el corazón. En el momento que hay un error en cualquiera de los Observables
+  este se emite al suscriptor y todos los Observables pendientes se cancelan.
+</p>
+
+<p>
+  Ahora voy a explicarlo. Primero se emite el 💜. Este elemento crea un Observable que emitirá unas 🍇 pasados 150
+  milisegundos. Pasados 100 milisegundos se emite el 💚, que crea un nuevo Observable que emite inmediatamente la 🍏 y
+  completa. Pasados otros 50 milisegundos se emiten las 🍇 y se completa el Observable. Pasan entonces otros 50
+  milisegundos y se emite el ❤️. Este emitirá una 🍓 pasados otros 150 milisegundos. Por último se emite la 🏘️ en el
+  Observable fuente, que produce inmediatamente un error que se entrega al suscriptor. Por lo tanto el Observable de la
+  🍓 se cancela y no se emite al suscriptor.
+</p>
+
+<p>
+  A continuación te dejo un simulador para que pruebes:
+</p>
+
+<svg appDemoContainer viewBox="0 0 850 640">
+  <!-- main conveyor controller -->
+  <g appConveyorController transform="translate(50,490)" [button1]="controllerButtons[MAIN_ID][0]"
+    [button2]="controllerButtons[MAIN_ID][1]" [button3]="controllerButtons[MAIN_ID][2]"
+    [button4]="controllerButtons[MAIN_ID][3]" [button5]="controllerButtons[MAIN_ID][4]"
+    (onButtonClick)="onControllerButtonClick($event)">
+  </g>
+
+  <!-- main conveyor -->
+  <g transform="translate(260, 490)" appConveyorHorizontal [length]="403"
+    [conveyorWorking$]="conveyorsWorking[MAIN_ID]">
+  </g>
+
+  <!-- operator -->
+  <g appOperator transform="translate(420, 452)"></g>
+
+  <!-- operator conveyor and controllers -->
+  <g [attr.transform]="'translate('+(460 - (200*MERGEMAP.length/2))+', 70)'" class="smooth-tranform-animation">
+    <g [attr.transform]="'translate('+200*i+',0)'" *ngFor="let M_ID of MERGEMAP; let i = index;" @fadeInOut
+      class="smooth-tranform-animation">
+
+      <!-- operator conveyor controller -->
+      <g appConveyorController [attr.transform]="'translate(25,0)'" [button1]="controllerButtons[M_ID][0]"
+        [button2]="controllerButtons[M_ID][1]" [button3]="controllerButtons[M_ID][2]"
+        [button4]="controllerButtons[M_ID][3]" [button5]="controllerButtons[M_ID][4]"
+        (onButtonClick)="onControllerButtonClick($event)">
+      </g>
+
+      <!-- operator conveyor -->
+      <g [attr.transform]="'translate(70, 120)'" appConveyorVertical [length]="203"
+        [conveyorWorking$]="conveyorsWorking[M_ID]">
+      </g>
+
+      <!-- elements in operator conveyor -->
+      <g>
+        <ng-container *ngFor="let element of elementsInConveyor">
+          <text *ngIf="element.conveyorId === M_ID" x="90" [attr.y]="element.y">{{element.value}}</text>
+        </ng-container>
+      </g>
+    </g>
+  </g>
+
+  <!-- subscriber -->
+  <g appSubscriber transform="translate(690,420)" [showSpeechBubble$]="speechBubble$"
+    (onSubscribe$)="onSubscribe($event)"></g>
+
+  <!-- elements in main conveyor -->
+  <g>
+    <ng-container *ngFor="let element of elementsInConveyor">
+      <text *ngIf="element.conveyorId === MAIN_ID" [attr.x]="element.x" y="546">{{element.value}}</text>
+    </ng-container>
+  </g>
+</svg>

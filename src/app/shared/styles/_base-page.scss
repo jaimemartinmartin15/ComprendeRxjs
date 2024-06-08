@@ -1,0 +1,35 @@
+@import "./colors";
+
+:host {
+    display: block;
+}
+
+.page-header {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+
+    .link-rxjs {
+        color: $color-orange;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .page-header {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-header {
+        display: block;
+        margin-bottom: 30px;
+
+        .title {
+            margin-bottom: 8px;
+            font-size: 1.9rem;
+        }
+    }
+}
