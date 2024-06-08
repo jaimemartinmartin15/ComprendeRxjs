@@ -2,7 +2,7 @@
 
 Angular web page that explains rxjs operators. Deployed to <https://jaimeelingeniero.es/comprende-rxjs>
 
-<!-- TODO add workflow badge -->
+[![Build And Deploy](https://github.com/jaimemartinmartin15/ComprendeRxjs/actions/workflows/build-and-publish.yml/badge.svg)](https://github.com/jaimemartinmartin15/ComprendeRxjs/actions/workflows/build-and-publish.yml)
 
 ## Development
 
