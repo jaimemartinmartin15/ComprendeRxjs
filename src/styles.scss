@@ -5,28 +5,10 @@ body {
   font-size: 1.125rem;
 }
 
-.app-no-break {
-  white-space: nowrap;
-}
-
 // for rxjs pages after upgrading highlight.js in rxjs-layout-page resolver
 // pre tag is added by the library, so this needs to be global
-pre[class~="hljs"],
-.app-command-sintax {
+pre[class~="hljs"] {
   overflow-x: auto;
   background-color: #f2f2f2;
   padding: 10px 15px;
-}
-
-.app-link {
-  color: #d17515; /* $color-orange; */
-
-  &:hover {
-    filter: brightness(70%);
-  }
-
-  &:active {
-    display: inline-block;
-    transform: scale(0.98);
-  }
 }
