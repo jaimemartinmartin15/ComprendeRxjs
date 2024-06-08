@@ -33,4 +33,4 @@ jobs:
           aws s3 sync ./dist/comprende-rxjs/browser \
                       s3://jaimeelingeniero.es/comprende-rxjs \
                       --delete
-          aws s3 cp ./dist/comprende-rxjs/3rdpartylicenses.txt s3://jaimeelingeniero.es/comprende-rxjs
+          aws s3 cp ./dist/comprende-rxjs/3rdpartylicenses.txt s3://jaimeelingeniero.es/comprende-rxjs/3rdpartylicenses.txt
