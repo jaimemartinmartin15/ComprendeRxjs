@@ -4,7 +4,7 @@ import { HighlightJsModule } from 'ngx-highlight-js';
 
 import { <%= classify(name) %>Component } from './<%= dasherize(name) %>.component';
 import { <%= classify(name) %>RoutingModule } from './<%= dasherize(name) %>-routing.module';
-import { RxjsComponentsModule } from '../shared/components/rxjs-components.module';
+import { RxjsComponentsModule } from '../../shared/components/rxjs-components.module';
 
 @NgModule({
   imports: [CommonModule, <%= classify(name) %>RoutingModule, RxjsComponentsModule, HighlightJsModule],

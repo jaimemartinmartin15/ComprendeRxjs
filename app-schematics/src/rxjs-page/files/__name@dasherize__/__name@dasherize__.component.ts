@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { BehaviorSubject, Subject, <%= name %> } from 'rxjs';
-import { BaseOperatorComponent } from '../shared/base-operator.component';
-import { ButtonController } from '../shared/components/conveyor-controller/button-controller';
-import { ElementInConveyor } from '../shared/element-in-conveyor';
-import { ObservableEventType } from '../shared/observable-event-type';
+import { BaseOperatorComponent } from '../../shared/base-operator.component';
+import { ButtonController } from '../../shared/components/conveyor-controller/button-controller';
+import { ElementInConveyor } from '../../shared/element-in-conveyor';
+import { ObservableEventType } from '../../shared/observable-event-type';
 
 @Component({
   selector: 'app-<%= dasherize(name) %>',

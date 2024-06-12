@@ -11,107 +11,107 @@ const routes: Routes = [
     children: [
       {
         path: 'timer',
-        loadChildren: () => import('../timer/timer.module').then((m) => m.TimerModule),
+        loadChildren: () => import('./timer/timer.module').then((m) => m.TimerModule),
       },
       {
         path: 'interval',
-        loadChildren: () => import('../interval/interval.module').then((m) => m.IntervalModule),
+        loadChildren: () => import('./interval/interval.module').then((m) => m.IntervalModule),
       },
       {
         path: 'from',
-        loadChildren: () => import('../from/from.module').then((m) => m.FromModule),
+        loadChildren: () => import('./from/from.module').then((m) => m.FromModule),
       },
       {
         path: 'of',
-        loadChildren: () => import('../of/of.module').then((m) => m.OfModule),
+        loadChildren: () => import('./of/of.module').then((m) => m.OfModule),
       },
       {
         path: 'behaviorSubject',
-        loadChildren: () => import('../behavior-subject/behavior-subject.module').then((m) => m.BehaviorSubjectModule),
+        loadChildren: () => import('./behavior-subject/behavior-subject.module').then((m) => m.BehaviorSubjectModule),
       },
       {
         path: 'subject',
-        loadChildren: () => import('../subject/subject.module').then((m) => m.SubjectModule),
+        loadChildren: () => import('./subject/subject.module').then((m) => m.SubjectModule),
       },
       {
         path: 'distinct',
-        loadChildren: () => import('../distinct/distinct.module').then((m) => m.DistinctModule),
+        loadChildren: () => import('./distinct/distinct.module').then((m) => m.DistinctModule),
       },
       {
         path: 'takeWhile',
-        loadChildren: () => import('../take-while/take-while.module').then((m) => m.TakeWhileModule),
+        loadChildren: () => import('./take-while/take-while.module').then((m) => m.TakeWhileModule),
       },
       {
         path: 'filter',
-        loadChildren: () => import('../filter/filter.module').then((m) => m.FilterModule),
+        loadChildren: () => import('./filter/filter.module').then((m) => m.FilterModule),
       },
       {
         path: 'takeUntil',
-        loadChildren: () => import('../take-until/take-until.module').then((m) => m.TakeUntilModule),
+        loadChildren: () => import('./take-until/take-until.module').then((m) => m.TakeUntilModule),
       },
       {
         path: 'take',
-        loadChildren: () => import('../take/take.module').then((m) => m.TakeModule),
+        loadChildren: () => import('./take/take.module').then((m) => m.TakeModule),
       },
       {
         path: 'first',
-        loadChildren: () => import('../first/first.module').then((m) => m.FirstModule),
+        loadChildren: () => import('./first/first.module').then((m) => m.FirstModule),
       },
       {
         path: 'skip',
-        loadChildren: () => import('../skip/skip.module').then((m) => m.SkipModule),
+        loadChildren: () => import('./skip/skip.module').then((m) => m.SkipModule),
       },
       {
         path: 'distinctUntilChanged',
-        loadChildren: () => import('../distinct-until-changed/distinct-until-changed.module').then((m) => m.DistinctUntilChangedModule),
+        loadChildren: () => import('./distinct-until-changed/distinct-until-changed.module').then((m) => m.DistinctUntilChangedModule),
       },
       {
         path: 'auditTime',
-        loadChildren: () => import('../audit-time/audit-time.module').then((m) => m.AuditTimeModule),
+        loadChildren: () => import('./audit-time/audit-time.module').then((m) => m.AuditTimeModule),
       },
       {
         path: 'sampleTime',
-        loadChildren: () => import('../sample-time/sample-time.module').then((m) => m.SampleTimeModule),
+        loadChildren: () => import('./sample-time/sample-time.module').then((m) => m.SampleTimeModule),
       },
       {
         path: 'debounceTime',
-        loadChildren: () => import('../debounce-time/debounce-time.module').then((m) => m.DebounceTimeModule),
+        loadChildren: () => import('./debounce-time/debounce-time.module').then((m) => m.DebounceTimeModule),
       },
       {
         path: 'endWith',
-        loadChildren: () => import('../end-with/end-with.module').then((m) => m.EndWithModule),
+        loadChildren: () => import('./end-with/end-with.module').then((m) => m.EndWithModule),
       },
       {
         path: 'observable',
-        loadChildren: () => import('../observable/observable.module').then((m) => m.ObservableModule),
+        loadChildren: () => import('./observable/observable.module').then((m) => m.ObservableModule),
       },
       {
         path: 'mergeMap',
-        loadChildren: () => import('../merge-map/merge-map.module').then((m) => m.MergeMapModule),
+        loadChildren: () => import('./merge-map/merge-map.module').then((m) => m.MergeMapModule),
       },
       {
         path: 'concatMap',
-        loadChildren: () => import('../concat-map/concat-map.module').then((m) => m.ConcatMapModule),
+        loadChildren: () => import('./concat-map/concat-map.module').then((m) => m.ConcatMapModule),
       },
       {
         path: 'switchMap',
-        loadChildren: () => import('../switch-map/switch-map.module').then((m) => m.SwitchMapModule),
+        loadChildren: () => import('./switch-map/switch-map.module').then((m) => m.SwitchMapModule),
       },
       {
         path: 'combineLatestWith',
-        loadChildren: () => import('../combine-latest-with/combine-latest-with.module').then((m) => m.CombineLatestWithModule),
+        loadChildren: () => import('./combine-latest-with/combine-latest-with.module').then((m) => m.CombineLatestWithModule),
       },
       {
         path: 'exhaustMap',
-        loadChildren: () => import('../exhaust-map/exhaust-map.module').then((m) => m.ExhaustMapModule),
+        loadChildren: () => import('./exhaust-map/exhaust-map.module').then((m) => m.ExhaustMapModule),
       },
       {
         path: 'forkJoin',
-        loadChildren: () => import('../fork-join/fork-join.module').then((m) => m.ForkJoinModule),
+        loadChildren: () => import('./fork-join/fork-join.module').then((m) => m.ForkJoinModule),
       },
       {
         path: 'startWith',
-        loadChildren: () => import('../start-with/start-with.module').then((m) => m.StartWithModule),
+        loadChildren: () => import('./start-with/start-with.module').then((m) => m.StartWithModule),
       },
     ],
   },
