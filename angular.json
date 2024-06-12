@@ -41,6 +41,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "stylePreprocessorOptions": {
+              "includePaths": ["./node_modules"]
+            },
             "outputPath": "dist/comprende-rxjs",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -51,7 +54,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicons"
+              "src/assets/favicons"
             ],
             "styles": [
               "src/styles.scss"
