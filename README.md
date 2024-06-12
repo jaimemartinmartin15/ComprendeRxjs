@@ -26,6 +26,22 @@ You might need a valid personal access token to download some scoped dependencie
 npm run start
 ```
 
+### Add new operator demo page
+
+You can execute an schematic to generate the boiler plate:
+
+```text
+ng g ./app-schematics:rxjs-page <operatorName>
+```
+
+If it fails, make sure it is built:
+
+```text
+cd ./app-schematics && npm run build
+```
+
+Check [README.md](./app-schematics/README.md) for more info.
+
 ## Build
 
 To build the project run:

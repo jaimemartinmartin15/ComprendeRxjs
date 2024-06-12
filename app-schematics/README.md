@@ -4,7 +4,11 @@ This package contains schematics to run in this project:
 
 - rxjs-page
   
-  Generates the files for a new operator component. Manually, add new entry in the corresponding group in [home-menu-links.ts](../src/app/home-menu/home-menu-links.ts), or create a new group.
+  Generates the files for a new operator component.
+  
+  Manually, add new entry in the corresponding group in [home-menu-links.ts](../src/app/home-menu/home-menu-links.ts), or create a new group.
+  
+  Then, complete the TODOs.
 
 ## Development
 
