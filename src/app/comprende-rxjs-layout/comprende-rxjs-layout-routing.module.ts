@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RxjsLayoutPageComponent } from './rxjs-layout-page.component';
-import { RxjsLayoutPageResolver } from './rxjs-layout-page.resolver';
+import { RxjsLayoutPageComponent } from './comprende-rxjs-layout.component';
+import { RxjsLayoutPageResolver } from './comprende-rxjs-layout.resolver';
 
 const routes: Routes = [
   {

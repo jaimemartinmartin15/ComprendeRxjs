@@ -8,7 +8,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./rxjs-layout-page/rxjs-layout-page.module').then((m) => m.RxjsLayoutPageModule),
+    loadChildren: () => import('./comprende-rxjs-layout/comprende-rxjs-layout.module').then((m) => m.RxjsLayoutPageModule),
   },
   {
     path: '**',

@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { HomeMenuLink, LINKS_GROUPS_OPERATORS, LINKS_TO_START } from '../home-menu/home-menu-links';
 
 @Component({
-  selector: 'app-rxjs-layout-page',
-  templateUrl: './rxjs-layout-page.component.html',
-  styleUrls: ['./rxjs-layout-page.component.scss'],
+  selector: 'app-comprende-rxjs-layout',
+  templateUrl: './comprende-rxjs-layout.component.html',
+  styleUrls: ['./comprende-rxjs-layout.component.scss'],
 })
 export class RxjsLayoutPageComponent {
   public isShowingLeftMenu: boolean = false;
