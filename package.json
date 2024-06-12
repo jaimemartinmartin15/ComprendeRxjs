@@ -1,6 +1,6 @@
 {
   "name": "comprende-rxjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "start": "ng serve -o",
     "start:public": "ng serve -o --host 0.0.0.0 --port 80",
@@ -16,6 +16,7 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
+    "@jaimemartinmartin15/jei-devkit-angular-shared": "^2.0.1",
     "ngx-highlight-js": "^17.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
