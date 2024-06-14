@@ -66,4 +66,4 @@ When pushing the tag to the remote, it will trigger the workflow **build-and-pub
 
 Builds and deploys the application to the server.
 
-Basically, it copies the files in the `dist` folder and puts them in `lista-de-viaje/` folder in the server.
+Basically, it copies the files in the `dist` folder and puts them in `comprende-rxjs/` folder in the server.
