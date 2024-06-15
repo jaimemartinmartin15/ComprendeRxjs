@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.3
+
+Fix preview images for open graph.
+
 ## 1.0.2
 
 Fix lang attribute in index.html
