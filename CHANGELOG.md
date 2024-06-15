@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.2
+
+Fix lang attribute in index.html
+
 ## 1.0.1
 
 Use jei-devkit-angular-shared.
